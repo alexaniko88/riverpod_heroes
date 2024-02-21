@@ -97,16 +97,3 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
-
-# Exceptions to the above rules.
-!**/ios/**/default.mode1v3
-!**/ios/**/default.mode2v3
-!**/ios/**/default.pbxuser
-!**/ios/**/default.perspectivev3
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-!/dev/ci/**/Gemfile.lock
-!.vscode/extensions.json
-!.vscode/launch.json
-!.idea/codeStyles/
-!.idea/dictionaries/
-!.idea/runConfigurations/
