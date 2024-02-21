@@ -1,5 +1,5 @@
 name: riverpod_heroes
-description: A Very Good Project created by Very Good CLI.
+description: As simple example of using riverpod with opensource list of super heroes
 version: 1.0.0+1
 publish_to: none
 
@@ -7,19 +7,17 @@ environment:
   sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
-  bloc: ^8.1.2
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.3
   flutter_localizations:
     sdk: flutter
+  flutter_riverpod: ^2.4.10
+  go_router: ^13.2.0
   intl: ^0.18.0
 
 dev_dependencies:
-  bloc_test: ^9.1.4
   flutter_test:
     sdk: flutter
-  mocktail: ^1.0.0
   very_good_analysis: ^5.1.0
 
 flutter:
