@@ -2,7 +2,6 @@
     package="com.example.verygoodcore.riverpod_heroes">
    <application
         android:label="${appName}"
-        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -1,6 +1,7 @@
 part of '../../heroes.dart';
-abstract class HeroesRepository {
-  Future<List<Hero>> getAllHeroes();
 
-  Future<Hero> getHeroDetails(String id);
+abstract class HeroesRepository {
+  Future<Result<List<HeroModel>, AppException>> getAllHeroes();
+
+  Future<HeroModel> getHeroDetails(String id);
 }

@@ -1,15 +1,20 @@
 
 part of '../../heroes.dart';
 
+//ignore_for_file: invalid_annotation_target
 @freezed
 class HeroModel with _$HeroModel {
   const factory HeroModel({
     int? id,
     String? name,
     String? slug,
+    @JsonKey(name: 'appearance')
     AppearanceModel? appearanceModel,
+    @JsonKey(name: 'biography')
     BiographyModel? biographyModel,
+    @JsonKey(name: 'powerstats')
     PowerStatsModel? powerStatsModel,
+    @JsonKey(name: 'images')
     HeroImagesModel? heroImagesModel,
   }) = _HeroModel;
 
