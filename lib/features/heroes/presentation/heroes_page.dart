@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:riverpod_heroes/l10n/l10n.dart';
-
+part of '../heroes.dart';
 class HeroesPage extends StatelessWidget {
   const HeroesPage({super.key});
 
