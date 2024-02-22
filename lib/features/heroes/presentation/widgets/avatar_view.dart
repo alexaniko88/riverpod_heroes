@@ -5,11 +5,11 @@ class AvatarView extends StatelessWidget {
   final bool useDecoration;
 
   const AvatarView({
-    Key? key,
+    super.key,
     required this.url,
     required this.width,
     this.useDecoration = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

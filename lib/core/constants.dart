@@ -8,6 +8,8 @@ const double counterActionsBottomPadding = 36;
 const double errorStateIconSize = 50;
 const String notAvailable = 'N/A';
 
+const String allPublishers = "all_publishers";
+
 final kTestMode = Platform.environment.containsKey('FLUTTER_TEST');
 
 

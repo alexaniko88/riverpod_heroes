@@ -10,7 +10,7 @@ class HeroesPage extends ConsumerStatefulWidget {
 class _HeroesPageState extends ConsumerState<HeroesPage> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 1), () {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ref.read(heroesStateNotifierProvider.notifier).getAllHeroes();
     });
     super.initState();
@@ -30,30 +30,45 @@ class _HeroesPageState extends ConsumerState<HeroesPage> {
       }),
     );
     return Scaffold(
-      appBar: AppBar(title: Text(loc.heroesAppBarTitle)),
-      body: ListView.builder(
-        shrinkWrap: true,
-        itemCount: state.heroes.length,
-        padding: const EdgeInsets.all(defaultPadding),
-        itemBuilder: (context, index) {
-          final item = state.heroes[index];
-          return Card(
-            child: ListTile(
-              leading: Hero(
-                tag: item.id.toString(),
-                child: AvatarView(
-                  url: item.heroImagesModel?.sm ?? '',
-                  width: leadingImageSize,
-                ),
-              ),
-              title: Text(item.name ?? ''),
-              subtitle: Text(item.biographyModel?.fullName ?? ''),
-              trailing: Text(item.biographyModel?.publisher ?? ''),
-              onTap: () {},
-            ),
-          );
-        },
+      appBar: AppBar(
+        title: Text(
+          state.filteredHeroes.isNotEmpty ? '${loc.heroesAppBarTitle}: ${state.filteredHeroes.length}' : loc.heroesAppBarTitle,
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_list_alt),
+            onPressed: () {
+              final publishers = ref.read(heroesStateNotifierProvider.notifier).getAllPublishers();
+              HeroesFilters.show(context: context, publishers: publishers);
+            },
+          ),
+        ],
       ),
+      body: state.status == HeroesStatus.success
+          ? ListView.builder(
+              shrinkWrap: true,
+              itemCount: state.filteredHeroes.length,
+              padding: const EdgeInsets.all(defaultPadding),
+              itemBuilder: (context, index) {
+                final item = state.filteredHeroes[index];
+                return Card(
+                  child: ListTile(
+                    leading: Hero(
+                      tag: item.id.toString(),
+                      child: AvatarView(
+                        url: item.imageUrl,
+                        width: leadingImageSize,
+                      ),
+                    ),
+                    title: Text(item.name ?? ''),
+                    subtitle: Text(item.fullName),
+                    trailing: Text(item.publisher),
+                    onTap: () => context.push(RoutePath.heroDetails.value, extra: item),
+                  ),
+                );
+              },
+            )
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
