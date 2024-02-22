@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_heroes/features/heroes/heroes.dart';
 
-
 enum RoutePath {
-  home('/');
+  home('/'),
+  heroDetails('/hero-details');
 
   const RoutePath(this.value);
 
@@ -20,6 +20,28 @@ class Routes {
           key: state.pageKey,
           child: const HeroesPage(),
         ),
+      ),
+      GoRoute(
+        path: RoutePath.heroDetails.value,
+        pageBuilder: (context, state) {
+          final heroModel = state.extra as HeroModel;
+          return CustomTransitionPage(
+            opaque: false,
+            barrierDismissible: true,
+            child: HeroDetailsPage(heroModel: heroModel),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
       ),
     ],
   );

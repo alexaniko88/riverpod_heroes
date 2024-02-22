@@ -1,4 +1,3 @@
-
 part of '../../heroes.dart';
 
 //ignore_for_file: invalid_annotation_target
@@ -8,22 +7,17 @@ class HeroModel with _$HeroModel {
     int? id,
     String? name,
     String? slug,
-    @JsonKey(name: 'appearance')
-    AppearanceModel? appearanceModel,
-    @JsonKey(name: 'biography')
-    BiographyModel? biographyModel,
-    @JsonKey(name: 'powerstats')
-    PowerStatsModel? powerStatsModel,
-    @JsonKey(name: 'images')
-    HeroImagesModel? heroImagesModel,
+    @JsonKey(name: 'appearance') AppearanceModel? appearanceModel,
+    @JsonKey(name: 'biography') BiographyModel? biographyModel,
+    @JsonKey(name: 'powerstats') PowerStatsModel? powerStatsModel,
+    @JsonKey(name: 'images') HeroImagesModel? heroImagesModel,
   }) = _HeroModel;
 
-  factory HeroModel.fromJson(Map<String, dynamic> json) =>
-      _$HeroModelFromJson(json);
+  factory HeroModel.fromJson(Map<String, dynamic> json) => _$HeroModelFromJson(json);
 }
 
 @freezed
-class AppearanceModel with _$AppearanceModel{
+class AppearanceModel with _$AppearanceModel {
   const factory AppearanceModel({
     String? gender,
     String? race,
@@ -31,13 +25,11 @@ class AppearanceModel with _$AppearanceModel{
     String? hairColor,
   }) = _AppearanceModel;
 
-  factory AppearanceModel.fromJson(Map<String, dynamic> json) =>
-      _$AppearanceModelFromJson(json);
-
+  factory AppearanceModel.fromJson(Map<String, dynamic> json) => _$AppearanceModelFromJson(json);
 }
 
 @freezed
-class BiographyModel with _$BiographyModel{
+class BiographyModel with _$BiographyModel {
   const factory BiographyModel({
     String? fullName,
     String? alterEgos,
@@ -47,12 +39,11 @@ class BiographyModel with _$BiographyModel{
     String? alignment,
   }) = _BiographyModel;
 
-  factory BiographyModel.fromJson(Map<String, dynamic> json) =>
-      _$BiographyModelFromJson(json);
+  factory BiographyModel.fromJson(Map<String, dynamic> json) => _$BiographyModelFromJson(json);
 }
 
 @freezed
-class PowerStatsModel with _$PowerStatsModel{
+class PowerStatsModel with _$PowerStatsModel {
   const factory PowerStatsModel({
     int? intelligence,
     int? strength,
@@ -62,12 +53,11 @@ class PowerStatsModel with _$PowerStatsModel{
     int? combat,
   }) = _PowerStatsModel;
 
-  factory PowerStatsModel.fromJson(Map<String, dynamic> json) =>
-      _$PowerStatsModelFromJson(json);
+  factory PowerStatsModel.fromJson(Map<String, dynamic> json) => _$PowerStatsModelFromJson(json);
 }
 
 @freezed
-class HeroImagesModel with _$HeroImagesModel{
+class HeroImagesModel with _$HeroImagesModel {
   const factory HeroImagesModel({
     String? xs,
     String? sm,
@@ -75,6 +65,5 @@ class HeroImagesModel with _$HeroImagesModel{
     String? lg,
   }) = _HeroImagesModel;
 
-  factory HeroImagesModel.fromJson(Map<String, dynamic> json) =>
-      _$HeroImagesModelFromJson(json);
+  factory HeroImagesModel.fromJson(Map<String, dynamic> json) => _$HeroImagesModelFromJson(json);
 }

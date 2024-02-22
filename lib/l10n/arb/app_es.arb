@@ -1,4 +1,11 @@
 {
     "@@locale": "es",
-    "heroesAppBarTitle": "Heroes"
+    "heroesAppBarTitle": "Heroes",
+    "speed": "Velocidad",
+    "power": "Poder",
+    "strength": "Fuerza",
+    "intelligence": "Inteligencia",
+    "durability": "Durabilidad",
+    "combat": "Combate",
+    "all": "Todos"
 }
