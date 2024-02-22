@@ -2,8 +2,6 @@ part of '../../heroes.dart';
 
 abstract class HeroesDatasource {
   Future<Result<List<HeroModel>, AppException>> getAllHeroes();
-
-  Future<Result<HeroModel, AppException>> getHeroDetails(String id);
 }
 
 class HeroesRemoteDatasource extends HeroesDatasource {
@@ -35,10 +33,5 @@ class HeroesRemoteDatasource extends HeroesDatasource {
       },
       (f) => Result.failure(f),
     );
-  }
-
-  @override
-  Future<Result<HeroModel, AppException>> getHeroDetails(String id) async {
-    return Future.value();
   }
 }
