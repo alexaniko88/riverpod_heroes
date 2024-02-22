@@ -10,12 +10,4 @@ class HeroesRepositoryImpl implements HeroesRepository {
   Future<Result<List<HeroModel>, AppException>> getAllHeroes() {
     return remoteDatasource.getAllHeroes();
   }
-
-  @override
-  Future<HeroModel> getHeroDetails(String id) {
-    // TODO: implement getHeroDetails
-    throw UnimplementedError();
-  }
-
-  
 }
