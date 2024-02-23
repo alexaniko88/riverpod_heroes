@@ -1,8 +1,7 @@
 part of '../../core.dart';
 
-final networkServiceProvider = Provider<DioNetworkService>(
-  (ref) {
-    final Dio dio = Dio();
-    return DioNetworkService(dio);
-  },
-);
+@riverpod
+NetworkService networkService(NetworkServiceRef ref) {
+  final Dio dio = Dio();
+  return DioNetworkService(dio);
+}

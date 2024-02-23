@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_heroes/config/config.dart';
 import 'package:riverpod_heroes/features/heroes/heroes.dart';
 
@@ -26,6 +27,8 @@ part 'mixins/exception_handler_mixin.dart';
 part 'network/dio_network_service.dart';
 
 part 'network/network_service.dart';
+
+part 'core.g.dart';
 
 part 'observers.dart';
 
