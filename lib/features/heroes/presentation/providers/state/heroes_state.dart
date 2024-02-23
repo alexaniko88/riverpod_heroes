@@ -11,7 +11,6 @@ abstract class HeroesState with _$HeroesState {
 }
 
 enum HeroesStatus {
-  initial,
   loading,
   success,
   error,

@@ -34,6 +34,7 @@ class _HeroesFiltersState extends ConsumerState<HeroesFilters> {
 
   @override
   Widget build(BuildContext context) {
+    final heroesNotifier = heroesNotifierProvider(ref.watch(heroesRepositoryProvider));
     return AlertDialog(
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +45,7 @@ class _HeroesFiltersState extends ConsumerState<HeroesFilters> {
             value: dropdownValue,
             onChanged: (String? newValue) {
               if(newValue != null) {
-                ref.read(heroesStateNotifierProvider.notifier).filterHeroes(newValue);
+                ref.read(heroesNotifier.notifier).filterHeroes(newValue);
                 setState(() {
                   dropdownValue = newValue;
                 });
@@ -65,7 +66,7 @@ class _HeroesFiltersState extends ConsumerState<HeroesFilters> {
             value: sortType,
             onChanged: (SortType? newSortType) {
               if (newSortType != null) {
-                ref.read(heroesStateNotifierProvider.notifier).sortByType(newSortType);
+                ref.read(heroesNotifier.notifier).sortByType(newSortType);
                 setState(() {
                   sortType = newSortType;
                 });

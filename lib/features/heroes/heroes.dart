@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_heroes/core/core.dart';
 import 'package:riverpod_heroes/l10n/l10n.dart';
 import 'package:riverpod_heroes/navigation/navigation.dart';

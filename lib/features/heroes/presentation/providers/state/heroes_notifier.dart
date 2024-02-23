@@ -10,21 +10,14 @@ enum SortType {
   strength,
 }
 
-class HeroesNotifier extends StateNotifier<HeroesState> {
-  HeroesNotifier({
-    required this.repository,
-  }) : super(const HeroesState(status: HeroesStatus.initial, heroes: [], filteredHeroes: []));
+@riverpod
+class HeroesNotifier extends _$HeroesNotifier {
+  @override
+  FutureOr<HeroesState> build(HeroesRepository repository) => _getAllHeroes();
 
-  final HeroesRepository repository;
-
-  Future<void> getAllHeroes() async {
-    state = HeroesState(
-      status: HeroesStatus.loading,
-      heroes: state.heroes,
-      filteredHeroes: state.filteredHeroes,
-    );
+  FutureOr<HeroesState> _getAllHeroes() async {
     final response = await repository.getAllHeroes();
-    state = await response.fold(
+    return await response.fold(
       (heroes) {
         final sortedHeroes = _sortBy(heroes: heroes, sortType: SortType.name);
         return HeroesState(
@@ -34,8 +27,8 @@ class HeroesNotifier extends StateNotifier<HeroesState> {
         );
       },
       (failure) => HeroesState(
-        heroes: state.heroes,
-        filteredHeroes: state.filteredHeroes,
+        heroes: [],
+        filteredHeroes: [],
         status: HeroesStatus.error,
         failure: failure,
       ),
@@ -43,11 +36,12 @@ class HeroesNotifier extends StateNotifier<HeroesState> {
   }
 
   void sortByType(SortType sortType) {
-    state = HeroesState(
-      heroes: state.heroes,
-      filteredHeroes: _sortBy(heroes: state.heroes, sortType: sortType),
+    final heroes = state.value?.heroes ?? [];
+    state = AsyncValue.data(HeroesState(
+      heroes: heroes,
+      filteredHeroes: _sortBy(heroes: heroes, sortType: sortType),
       status: HeroesStatus.success,
-    );
+    ));
   }
 
   List<HeroModel> _sortBy({
@@ -88,18 +82,21 @@ class HeroesNotifier extends StateNotifier<HeroesState> {
   }
 
   void filterHeroes(String publisher) {
-    state = HeroesState(
-      heroes: state.heroes,
-      filteredHeroes: publisher != allPublishers
-          ? state.heroes.where((hero) => hero.publisher == publisher).toList()
-          : state.heroes,
-      status: HeroesStatus.success,
+    final heroes = state.value?.heroes ?? [];
+    state = AsyncValue.data(
+      HeroesState(
+        heroes: heroes,
+        filteredHeroes: publisher != allPublishers
+            ? heroes.where((hero) => hero.publisher == publisher).toList()
+            : heroes,
+        status: HeroesStatus.success,
+      ),
     );
   }
 
   List<String> getAllPublishers() {
     final response =
-        state.heroes.map((hero) => hero.publisher.trim()).where((publisher) => publisher.isNotEmpty).toSet().toList();
+    (state.value?.heroes ?? []).map((hero) => hero.publisher.trim()).where((publisher) => publisher.isNotEmpty).toSet().toList();
     return response..insert(0, allPublishers);
   }
 }
