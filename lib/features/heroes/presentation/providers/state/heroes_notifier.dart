@@ -13,11 +13,20 @@ enum SortType {
 @riverpod
 class HeroesNotifier extends _$HeroesNotifier {
   @override
-  FutureOr<HeroesState> build(HeroesRepository repository) => _getAllHeroes();
+  HeroesState build(HeroesRepository repository) => const HeroesState(
+        heroes: [],
+        filteredHeroes: [],
+        status: HeroesStatus.initial,
+      );
 
-  FutureOr<HeroesState> _getAllHeroes() async {
+  Future<void> getAllHeroes() async {
+    state = const HeroesState(
+      heroes: [],
+      filteredHeroes: [],
+      status: HeroesStatus.loading,
+    );
     final response = await repository.getAllHeroes();
-    return await response.fold(
+    state = await response.fold(
       (heroes) {
         final sortedHeroes = _sortBy(heroes: heroes, sortType: SortType.name);
         return HeroesState(
@@ -36,12 +45,12 @@ class HeroesNotifier extends _$HeroesNotifier {
   }
 
   void sortByType(SortType sortType) {
-    final heroes = state.value?.heroes ?? [];
-    state = AsyncValue.data(HeroesState(
+    final heroes = state.heroes;
+    state = HeroesState(
       heroes: heroes,
       filteredHeroes: _sortBy(heroes: heroes, sortType: sortType),
       status: HeroesStatus.success,
-    ));
+    );
   }
 
   List<HeroModel> _sortBy({
@@ -82,21 +91,18 @@ class HeroesNotifier extends _$HeroesNotifier {
   }
 
   void filterHeroes(String publisher) {
-    final heroes = state.value?.heroes ?? [];
-    state = AsyncValue.data(
-      HeroesState(
-        heroes: heroes,
-        filteredHeroes: publisher != allPublishers
-            ? heroes.where((hero) => hero.publisher == publisher).toList()
-            : heroes,
-        status: HeroesStatus.success,
-      ),
+    final heroes = state.heroes;
+    state = HeroesState(
+      heroes: heroes,
+      filteredHeroes:
+          publisher != allPublishers ? heroes.where((hero) => hero.publisher == publisher).toList() : heroes,
+      status: HeroesStatus.success,
     );
   }
 
   List<String> getAllPublishers() {
     final response =
-    (state.value?.heroes ?? []).map((hero) => hero.publisher.trim()).where((publisher) => publisher.isNotEmpty).toSet().toList();
+        state.heroes.map((hero) => hero.publisher.trim()).where((publisher) => publisher.isNotEmpty).toSet().toList();
     return response..insert(0, allPublishers);
   }
 }
