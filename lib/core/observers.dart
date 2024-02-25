@@ -2,6 +2,19 @@ part of 'core.dart';
 
 class Observers extends ProviderObserver {
   @override
+  void didAddProvider(
+    ProviderBase<Object?> provider,
+    Object? value,
+    ProviderContainer container,
+  ) {
+    log('''
+{
+  "provider": "${provider.name ?? provider.runtimeType}",
+  "newValue": "ADDED"
+}''');
+  }
+
+  @override
   void didUpdateProvider(
     ProviderBase provider,
     Object? previousValue,
@@ -11,7 +24,7 @@ class Observers extends ProviderObserver {
     log('''
 {
   "provider": "${provider.name ?? provider.runtimeType}",
-  "newValue": "$newValue"
+  "newValue": "UPDATED"
 }''');
   }
 
@@ -20,7 +33,7 @@ class Observers extends ProviderObserver {
     log('''
 {
   "provider": "${provider.name ?? provider.runtimeType}",
-  "newValue": "disposed"
+  "newValue": "DISPOSED"
 }''');
     super.didDisposeProvider(provider, container);
   }

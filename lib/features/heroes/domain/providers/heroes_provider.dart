@@ -5,7 +5,6 @@ HeroesDatasource heroesDataSource(HeroesDataSourceRef ref, NetworkService networ
   return HeroesRemoteDatasource(networkService);
 }
 
-
 @riverpod
 HeroesRepository heroesRepository(HeroesRepositoryRef ref) {
   final NetworkService networkService = ref.watch(networkServiceProvider);

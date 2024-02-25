@@ -3,6 +3,8 @@ part of '../../heroes.dart';
 //ignore_for_file: invalid_annotation_target
 @freezed
 class HeroModel with _$HeroModel {
+  const HeroModel._();
+
   const factory HeroModel({
     int? id,
     String? name,
@@ -14,6 +16,24 @@ class HeroModel with _$HeroModel {
   }) = _HeroModel;
 
   factory HeroModel.fromJson(Map<String, dynamic> json) => _$HeroModelFromJson(json);
+
+  String get imageUrl => heroImagesModel?.sm ?? '';
+
+  String get fullName => biographyModel?.fullName ?? '';
+
+  String get publisher => biographyModel?.publisher ?? '';
+
+  int get combat => powerStatsModel?.combat ?? 0;
+
+  int get durability => powerStatsModel?.durability ?? 0;
+
+  int get intelligence => powerStatsModel?.intelligence ?? 0;
+
+  int get power => powerStatsModel?.power ?? 0;
+
+  int get speed => powerStatsModel?.speed ?? 0;
+
+  int get strength => powerStatsModel?.strength ?? 0;
 }
 
 @freezed

@@ -1,10 +1,23 @@
 part of '../../heroes.dart';
 
-class HeroesPage extends ConsumerWidget {
+class HeroesPage extends ConsumerStatefulWidget {
   const HeroesPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  HeroesPageState createState() => HeroesPageState();
+}
+
+class HeroesPageState extends ConsumerState<HeroesPage> {
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 1), () {
+      ref.read(heroesNotifierProvider(ref.watch(heroesRepositoryProvider)).notifier).getAllHeroes();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final loc = context.loc;
     final heroesNotifier = heroesNotifierProvider(ref.watch(heroesRepositoryProvider));
     final state = ref.watch(heroesNotifier);
@@ -13,21 +26,15 @@ class HeroesPage extends ConsumerWidget {
       ((previous, next) {
         //show Snackbar on failure
         if (next is Failure) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(next.value?.failure?.message.toString() ?? '')));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(next.failure?.message.toString() ?? '')));
         }
       }),
     );
     return Scaffold(
       appBar: AppBar(
-        title: switch (state) {
-          AsyncData(:final value) => Text(
-              value.filteredHeroes.isNotEmpty
-                  ? '${loc.heroesAppBarTitle}: ${value.filteredHeroes.length}'
-                  : loc.heroesAppBarTitle,
-            ),
-          _ => const Text('Heroes'),
-        },
+        title: Text(state.filteredHeroes.isNotEmpty
+            ? '${loc.heroesAppBarTitle}: ${state.filteredHeroes.length}'
+            : loc.heroesAppBarTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_list_alt),
@@ -38,13 +45,13 @@ class HeroesPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: switch (state) {
-        AsyncData(:final value) => ListView.builder(
+      body: switch (state.status) {
+        HeroesStatus.success => ListView.builder(
             shrinkWrap: true,
-            itemCount: value.filteredHeroes.length,
+            itemCount: state.filteredHeroes.length,
             padding: const EdgeInsets.all(defaultPadding),
             itemBuilder: (context, index) {
-              final item = value.filteredHeroes[index];
+              final item = state.filteredHeroes[index];
               return Card(
                 child: ListTile(
                   leading: Hero(
@@ -62,7 +69,9 @@ class HeroesPage extends ConsumerWidget {
               );
             },
           ),
-        _ => const Center(child: CircularProgressIndicator()),
+        _ => const Center(
+            child: CircularProgressIndicator(),
+          ),
       },
     );
   }
