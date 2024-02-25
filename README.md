@@ -17,7 +17,9 @@ The data is fetched from the [SuperHero API][super_hero_api].
 
 ---
 
-![til](./assets/gifs/demo.gif)
+<p align="center" width="100%">
+    <img width="50%" src="./assets/gifs/demo.gif">
+</p>
 
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
 [internationalization_link]: https://flutter.dev/docs/development/accessibility-and-localization/internationalization
