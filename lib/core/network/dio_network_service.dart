@@ -8,7 +8,15 @@ class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
     if (!kTestMode) {
       dio.options = dioBaseOptions;
       if (kDebugMode) {
-        dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+        dio.interceptors.add(
+          LogInterceptor(
+            requestBody: true,
+            responseBody: true,
+            logPrint: (object) {
+              printLog(object.toString());
+            },
+          ),
+        );
       }
     }
   }
