@@ -22,6 +22,13 @@ dependencies:
   cached_network_image: ^3.3.1
   riverpod_annotation: ^2.3.4
 
+  basic_flutter_helper:
+    git:
+      url: https://github.com/alexaniko88/basic_flutter_helper.git
+      ref: master
+  flutter_animate: ^4.5.0
+  flutter_launcher_icons: ^0.13.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -37,3 +44,9 @@ flutter:
   generate: true
   assets:
     - assets/images/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/question_mark.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
