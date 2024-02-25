@@ -39,21 +39,23 @@ class HeroDetailsPage extends StatelessWidget {
                 Center(
                   child: Hero(
                     tag: heroModel.id.toString(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: _getAverageColorFromStats(),
-                            spreadRadius: _Constants.avatarSpreadRadius,
-                            blurRadius: _Constants.avatarBlurRadius,
-                          ),
-                        ],
+                    child: AvatarView(
+                      url: heroModel.imageUrl,
+                      width: heroDetailsImageWidth,
+                      useDecoration: false,
+                    ).animate().boxShadow(
+                      duration: const Duration(milliseconds: 500),
+                      begin: BoxShadow(
+                        color: _getAverageColorFromStats().withOpacity(0.2),
+                        spreadRadius: _Constants.avatarSpreadRadius,
+                        blurRadius: _Constants.avatarBlurRadius,
                       ),
-                      child: AvatarView(
-                        url: heroModel.imageUrl,
-                        width: heroDetailsImageWidth,
-                        useDecoration: false,
+                      end: BoxShadow(
+                        color: _getAverageColorFromStats(),
+                        spreadRadius: _Constants.avatarSpreadRadius,
+                        blurRadius: _Constants.avatarBlurRadius,
                       ),
+                      curve: Curves.easeInToLinear,
                     ),
                   ),
                 ),
@@ -63,12 +65,23 @@ class HeroDetailsPage extends StatelessWidget {
                     heroModel.fullName.isNotEmpty ? heroModel.fullName : heroModel.name ?? '',
                     style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.center,
-                  ),
+                  ).animate().moveX(
+                        duration: const Duration(milliseconds: 200),
+                        begin: -MediaQuery.of(context).size.width / 2,
+                        end: 0,
+                        curve: Curves.easeInToLinear,
+                      ),
                 ),
                 Text(
                   '(${heroModel.publisher})',
                   style: Theme.of(context).textTheme.titleMedium,
-                ),
+                ).animate().moveX(
+                      duration: const Duration(milliseconds: 200),
+                      begin: -MediaQuery.of(context).size.width / 2,
+                      end: 0,
+                      delay: const Duration(milliseconds: 200),
+                      curve: Curves.easeInToLinear,
+                    ),
                 Padding(
                   padding: const EdgeInsets.only(top: defaultPadding * 3),
                   child: Column(
@@ -114,6 +127,8 @@ class HeroDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                ).animate().scaleXY(
+                  duration: const Duration(milliseconds: 500),
                 ),
               ],
             ),
@@ -162,7 +177,7 @@ class HeroDetailsPage extends StatelessWidget {
                         color: _getColorByStat(stat),
                       ),
                 ),
-              ),
+              ).animate().flip(delay: const Duration(milliseconds: 500), duration: const Duration(milliseconds: 500)),
             ],
           ),
         ),
