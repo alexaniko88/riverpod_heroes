@@ -15,6 +15,11 @@ Use the concepts of clean architecture, layer separation and dependency injectio
 
 The data is fetched from the [SuperHero API][super_hero_api].
 
+---
+
+<p align="center">
+    <img width="35%" src="./assets/gifs/demo.gif">
+</p>
 
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
 [internationalization_link]: https://flutter.dev/docs/development/accessibility-and-localization/internationalization
