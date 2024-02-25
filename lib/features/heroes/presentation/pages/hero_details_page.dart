@@ -44,7 +44,7 @@ class HeroDetailsPage extends StatelessWidget {
                       width: heroDetailsImageWidth,
                       useDecoration: false,
                     ).animate().boxShadow(
-                      duration: const Duration(milliseconds: 500),
+                      duration: 500.ms,
                       begin: BoxShadow(
                         color: _getAverageColorFromStats().withOpacity(0.2),
                         spreadRadius: _Constants.avatarSpreadRadius,
@@ -66,7 +66,7 @@ class HeroDetailsPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ).animate().moveX(
-                        duration: const Duration(milliseconds: 200),
+                        duration: 200.ms,
                         begin: -MediaQuery.of(context).size.width / 2,
                         end: 0,
                         curve: Curves.easeInToLinear,
@@ -76,10 +76,10 @@ class HeroDetailsPage extends StatelessWidget {
                   '(${heroModel.publisher})',
                   style: Theme.of(context).textTheme.titleMedium,
                 ).animate().moveX(
-                      duration: const Duration(milliseconds: 200),
+                      duration: 200.ms,
                       begin: -MediaQuery.of(context).size.width / 2,
                       end: 0,
-                      delay: const Duration(milliseconds: 200),
+                      delay: 200.ms,
                       curve: Curves.easeInToLinear,
                     ),
                 Padding(
@@ -128,7 +128,7 @@ class HeroDetailsPage extends StatelessWidget {
                     ],
                   ),
                 ).animate().scaleXY(
-                  duration: const Duration(milliseconds: 500),
+                  duration: 500.ms,
                 ),
               ],
             ),
@@ -177,7 +177,7 @@ class HeroDetailsPage extends StatelessWidget {
                         color: _getColorByStat(stat),
                       ),
                 ),
-              ).animate().flip(delay: const Duration(milliseconds: 500), duration: const Duration(milliseconds: 500)),
+              ).animate().flip(delay: 500.ms, duration: 500.ms),
             ],
           ),
         ),
