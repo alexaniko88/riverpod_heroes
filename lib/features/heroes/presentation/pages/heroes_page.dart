@@ -10,7 +10,7 @@ class HeroesPage extends ConsumerStatefulWidget {
 class HeroesPageState extends ConsumerState<HeroesPage> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 1), () {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ref.read(heroesNotifierProvider(ref.watch(heroesRepositoryProvider)).notifier).getAllHeroes();
     });
     super.initState();
