@@ -12,7 +12,7 @@ import 'package:riverpod_heroes/config/config.dart';
 
 part 'constants.dart';
 
-part 'core.g.dart';
+part 'shared.g.dart';
 
 part 'domain/entities/response.dart';
 

@@ -1,4 +1,4 @@
 part of '../../shared.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 NetworkService networkService(NetworkServiceRef ref) => DioNetworkService(Dio());
