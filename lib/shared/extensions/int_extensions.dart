@@ -1,4 +1,4 @@
-part of '../core.dart';
+part of '../shared.dart';
 
 extension IntExtensions on int {
   bool isBetween({

@@ -1,4 +1,4 @@
-part of '../../core.dart';
+part of '../../shared.dart';
 
 class NetworkResponse {
   NetworkResponse({

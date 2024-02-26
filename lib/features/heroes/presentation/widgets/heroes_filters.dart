@@ -34,13 +34,14 @@ class _HeroesFiltersState extends ConsumerState<HeroesFilters> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc;
     final heroesNotifier = heroesNotifierProvider(ref.watch(heroesRepositoryProvider));
     return AlertDialog(
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text('Publisher: '),
+          Text('${loc.publisher}: '),
           DropdownButton<String>(
             value: dropdownValue,
             onChanged: (String? newValue) {
@@ -61,7 +62,7 @@ class _HeroesFiltersState extends ConsumerState<HeroesFilters> {
             ).toList(),
           ),
           const SizedBox(height: 20),
-          const Text("Sort by: "),
+          Text('${loc.sortBy}: '),
           DropdownButton<SortType>(
             value: sortType,
             onChanged: (SortType? newSortType) {

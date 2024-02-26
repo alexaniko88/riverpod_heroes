@@ -1,30 +1,25 @@
-part of '../core.dart';
+part of '../shared.dart';
 
 class DioNetworkService extends NetworkService with ExceptionHandlerMixin {
   final Dio dio;
 
   DioNetworkService(this.dio) {
-    // this throws error while running test
-    if (!kTestMode) {
-      dio.options = dioBaseOptions;
-      if (kDebugMode) {
-        dio.interceptors.add(
-          LogInterceptor(
-            requestBody: true,
-            responseBody: true,
-            logPrint: (object) {
-              printLog(object.toString());
-            },
-          ),
-        );
-      }
+    dio.options = BaseOptions(
+      baseUrl: baseUrl,
+      headers: headers,
+    );
+    if (kDebugMode) {
+      dio.interceptors.add(
+        LogInterceptor(
+          requestBody: true,
+          responseBody: true,
+          logPrint: (object) {
+            printLog(object.toString());
+          },
+        ),
+      );
     }
   }
-
-  BaseOptions get dioBaseOptions => BaseOptions(
-        baseUrl: baseUrl,
-        headers: headers,
-      );
 
   @override
   String get baseUrl => AppConfig.baseUrl;

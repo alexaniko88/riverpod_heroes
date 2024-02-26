@@ -1,4 +1,4 @@
-part of '../../core.dart';
+part of '../../shared.dart';
 
 sealed class Result<S, F> {
   const Result();

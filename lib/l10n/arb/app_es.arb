@@ -7,5 +7,7 @@
     "intelligence": "Inteligencia",
     "durability": "Durabilidad",
     "combat": "Combate",
-    "all": "Todos"
+    "all": "Todos",
+    "publisher": "Editorial",
+    "sortBy": "Ordenar por"
 }

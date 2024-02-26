@@ -1,4 +1,4 @@
-part of '../core.dart';
+part of '../shared.dart';
 
 mixin ExceptionHandlerMixin on NetworkService {
   Future<Result<NetworkResponse, AppException>> handleException<T extends Object>(
