@@ -1,4 +1,4 @@
-part of '../../../heroes.dart';
+part of '../../heroes.dart';
 
 enum SortType {
   name,
@@ -53,6 +53,16 @@ class HeroesNotifier extends _$HeroesNotifier {
     );
   }
 
+  void filterByPublisher(String publisher) {
+    final heroes = state.heroes;
+    state = HeroesState(
+      heroes: heroes,
+      filteredHeroes:
+          publisher != allPublishers ? heroes.where((hero) => hero.publisher == publisher).toList() : heroes,
+      status: HeroesStatus.success,
+    );
+  }
+
   List<HeroModel> _sortBy({
     required List<HeroModel> heroes,
     required SortType sortType,
@@ -88,21 +98,5 @@ class HeroesNotifier extends _$HeroesNotifier {
         }
         return compare;
       });
-  }
-
-  void filterHeroes(String publisher) {
-    final heroes = state.heroes;
-    state = HeroesState(
-      heroes: heroes,
-      filteredHeroes:
-          publisher != allPublishers ? heroes.where((hero) => hero.publisher == publisher).toList() : heroes,
-      status: HeroesStatus.success,
-    );
-  }
-
-  List<String> getAllPublishers() {
-    final response =
-        state.heroes.map((hero) => hero.publisher.trim()).where((publisher) => publisher.isNotEmpty).toSet().toList();
-    return response..insert(0, allPublishers);
   }
 }

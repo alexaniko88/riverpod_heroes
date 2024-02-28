@@ -22,10 +22,9 @@ class HeroesPageState extends ConsumerState<HeroesPage> {
     final heroesNotifier = heroesNotifierProvider(ref.watch(heroesRepositoryProvider));
     final state = ref.watch(heroesNotifier);
     ref.listen(
-      heroesNotifier.select((value) => value),
+      heroesNotifier,
       ((previous, next) {
-        //show Snackbar on failure
-        if (next is Failure) {
+        if (next.status == HeroesStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(next.failure?.message.toString() ?? '')));
         }
       }),
@@ -39,8 +38,7 @@ class HeroesPageState extends ConsumerState<HeroesPage> {
           IconButton(
             icon: const Icon(Icons.filter_list_alt),
             onPressed: () {
-              final publishers = ref.read(heroesNotifier.notifier).getAllPublishers();
-              HeroesFilters.show(context: context, publishers: publishers);
+              HeroesFilters.show(context: context, publishers: state.getAllPublishers());
             },
           ),
         ],

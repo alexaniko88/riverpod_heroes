@@ -46,7 +46,7 @@ class _HeroesFiltersState extends ConsumerState<HeroesFilters> {
             value: dropdownValue,
             onChanged: (String? newValue) {
               if(newValue != null) {
-                ref.read(heroesNotifier.notifier).filterHeroes(newValue);
+                ref.read(heroesNotifier.notifier).filterByPublisher(newValue);
                 setState(() {
                   dropdownValue = newValue;
                 });
