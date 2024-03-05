@@ -1,20 +1,4 @@
 part of '../../heroes.dart';
-
-class _Constants {
-  static const double cardElevation = 10;
-  static const double totalStats = 6;
-  static const double avatarSpreadRadius = 5;
-  static const double avatarBlurRadius = 5;
-}
-
-class _ColorRanges {
-  static const int redRangeStart = 0;
-  static const int orangeRangeStart = 20;
-  static const int yellowRangeStart = 40;
-  static const int blueRangeStart = 60;
-  static const int greenRangeStart = 80;
-}
-
 class HeroDetailsPage extends StatelessWidget {
   final HeroModel heroModel;
 
@@ -25,12 +9,13 @@ class HeroDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc;
     return GestureDetector(
       onTap: () => context.pop(),
       child: Center(
         child: Card(
           margin: const EdgeInsets.all(defaultPadding),
-          elevation: _Constants.cardElevation,
+          elevation: cardElevation,
           child: Padding(
             padding: const EdgeInsets.all(defaultPadding),
             child: Column(
@@ -47,13 +32,13 @@ class HeroDetailsPage extends StatelessWidget {
                       duration: 500.ms,
                       begin: BoxShadow(
                         color: _getAverageColorFromStats().withOpacity(0.2),
-                        spreadRadius: _Constants.avatarSpreadRadius,
-                        blurRadius: _Constants.avatarBlurRadius,
+                        spreadRadius: avatarSpreadRadius,
+                        blurRadius: avatarBlurRadius,
                       ),
                       end: BoxShadow(
                         color: _getAverageColorFromStats(),
-                        spreadRadius: _Constants.avatarSpreadRadius,
-                        blurRadius: _Constants.avatarBlurRadius,
+                        spreadRadius: avatarSpreadRadius,
+                        blurRadius: avatarBlurRadius,
                       ),
                       curve: Curves.easeInToLinear,
                     ),
@@ -89,11 +74,11 @@ class HeroDetailsPage extends StatelessWidget {
                       Row(
                         children: [
                           _buildStatistic(
-                            label: context.loc.power,
+                            label: loc.power,
                             stat: heroModel.power,
                           ),
                           _buildStatistic(
-                            label: context.loc.speed,
+                            label: loc.speed,
                             stat: heroModel.speed,
                             left: false,
                           ),
@@ -102,11 +87,11 @@ class HeroDetailsPage extends StatelessWidget {
                       Row(
                         children: [
                           _buildStatistic(
-                            label: context.loc.strength,
+                            label: loc.strength,
                             stat: heroModel.strength,
                           ),
                           _buildStatistic(
-                            label: context.loc.intelligence,
+                            label: loc.intelligence,
                             stat: heroModel.intelligence,
                             left: false,
                           ),
@@ -115,11 +100,11 @@ class HeroDetailsPage extends StatelessWidget {
                       Row(
                         children: [
                           _buildStatistic(
-                            label: context.loc.durability,
+                            label: loc.durability,
                             stat: heroModel.durability,
                           ),
                           _buildStatistic(
-                            label: context.loc.combat,
+                            label: loc.combat,
                             stat: heroModel.combat,
                             left: false,
                           ),
@@ -193,29 +178,29 @@ class HeroDetailsPage extends StatelessWidget {
         heroModel.combat +
         heroModel.power;
     return _getColorByStat(
-      (totalStats / _Constants.totalStats).truncate(),
+      (totalStats / totalStats).truncate(),
     );
   }
 
   Color _getColorByStat(int stat) {
     if (stat.isBetween(
-      from: _ColorRanges.redRangeStart,
-      to: _ColorRanges.orangeRangeStart,
+      from: ColorRanges.redRangeStart,
+      to: ColorRanges.orangeRangeStart,
     )) {
       return Colors.red;
     } else if (stat.isBetween(
-      from: _ColorRanges.orangeRangeStart,
-      to: _ColorRanges.yellowRangeStart,
+      from: ColorRanges.orangeRangeStart,
+      to: ColorRanges.yellowRangeStart,
     )) {
       return Colors.orange;
     } else if (stat.isBetween(
-      from: _ColorRanges.yellowRangeStart,
-      to: _ColorRanges.blueRangeStart,
+      from: ColorRanges.yellowRangeStart,
+      to: ColorRanges.blueRangeStart,
     )) {
       return Colors.yellow;
     } else if (stat.isBetween(
-      from: _ColorRanges.blueRangeStart,
-      to: _ColorRanges.greenRangeStart,
+      from: ColorRanges.blueRangeStart,
+      to: ColorRanges.greenRangeStart,
     )) {
       return Colors.blue;
     } else {

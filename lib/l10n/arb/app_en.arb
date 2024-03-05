@@ -7,5 +7,7 @@
     "intelligence": "Intelligence",
     "durability": "Durability",
     "combat": "Combat",
-    "all": "All"
+    "all": "All",
+    "publisher": "Publisher",
+    "sortBy": "Sort by"
 }
