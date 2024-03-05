@@ -1,4 +1,3 @@
-
 part of '../../heroes.dart';
 
 class HeroesRepositoryImpl implements HeroesRepository {
@@ -7,7 +6,5 @@ class HeroesRepositoryImpl implements HeroesRepository {
   final HeroesDatasource remoteDatasource;
 
   @override
-  Future<Result<List<HeroModel>, AppException>> getAllHeroes() {
-    return remoteDatasource.getAllHeroes();
-  }
+  Future<Result<List<HeroModel>, AppException>> getAllHeroes() => remoteDatasource.getAllHeroes();
 }

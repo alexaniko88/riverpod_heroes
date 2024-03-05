@@ -76,7 +76,7 @@ void main() {
           ),
         ).thenAnswer(
           (_) async => Future.value(
-              Result.failure(AppException(statusCode: -1, message: 'Something went wrong', identifier: 'SOME_ERROR'))),
+              Result.failure(AppException(statusCode: StatusCode.socketException, message: 'Something went wrong', identifier: 'SOME_ERROR'))),
         );
         await tester.pumpWidget(
           ProviderScope(

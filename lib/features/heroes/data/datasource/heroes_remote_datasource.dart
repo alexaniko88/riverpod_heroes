@@ -21,7 +21,7 @@ class HeroesRemoteDatasource extends HeroesDatasource {
           return Result.failure(
             AppException(
               identifier: 'get all heroes',
-              statusCode: 0,
+              statusCode: StatusCode.noData,
               message: 'The data is not in the valid format.',
             ),
           );

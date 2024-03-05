@@ -45,7 +45,6 @@ class HeroesPageState extends ConsumerState<HeroesPage> {
       ),
       body: switch (state.status) {
         HeroesStatus.success => ListView.builder(
-            shrinkWrap: true,
             itemCount: state.filteredHeroes.length,
             padding: const EdgeInsets.all(defaultPadding),
             itemBuilder: (context, index) {

@@ -9,6 +9,7 @@ class HeroDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = context.loc;
     return GestureDetector(
       onTap: () => context.pop(),
       child: Center(
@@ -73,11 +74,11 @@ class HeroDetailsPage extends StatelessWidget {
                       Row(
                         children: [
                           _buildStatistic(
-                            label: context.loc.power,
+                            label: loc.power,
                             stat: heroModel.power,
                           ),
                           _buildStatistic(
-                            label: context.loc.speed,
+                            label: loc.speed,
                             stat: heroModel.speed,
                             left: false,
                           ),
@@ -86,11 +87,11 @@ class HeroDetailsPage extends StatelessWidget {
                       Row(
                         children: [
                           _buildStatistic(
-                            label: context.loc.strength,
+                            label: loc.strength,
                             stat: heroModel.strength,
                           ),
                           _buildStatistic(
-                            label: context.loc.intelligence,
+                            label: loc.intelligence,
                             stat: heroModel.intelligence,
                             left: false,
                           ),
@@ -99,11 +100,11 @@ class HeroDetailsPage extends StatelessWidget {
                       Row(
                         children: [
                           _buildStatistic(
-                            label: context.loc.durability,
+                            label: loc.durability,
                             stat: heroModel.durability,
                           ),
                           _buildStatistic(
-                            label: context.loc.combat,
+                            label: loc.combat,
                             stat: heroModel.combat,
                             left: false,
                           ),

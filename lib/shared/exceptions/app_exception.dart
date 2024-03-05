@@ -1,5 +1,12 @@
 part of '../shared.dart';
 
+enum StatusCode {
+  noData,
+  socketException,
+  dioException,
+  unknownError,
+}
+
 class AppException implements Exception {
   AppException({
     required this.message,
@@ -7,11 +14,11 @@ class AppException implements Exception {
     required this.identifier,
   });
   final String message;
-  final int statusCode;
+  final StatusCode statusCode;
   final String identifier;
   @override
   String toString() {
-    return 'statusCode=$statusCode\nmessage=$message\nidentifier=$identifier';
+    return 'statusCode=${statusCode.name}\nmessage=$message\nidentifier=$identifier';
   }
 
   Failure<NetworkResponse, AppException> get asFailure =>

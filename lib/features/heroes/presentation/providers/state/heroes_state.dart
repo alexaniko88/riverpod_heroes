@@ -6,9 +6,9 @@ abstract class HeroesState with _$HeroesState {
   const HeroesState._();
 
   const factory HeroesState({
-    required List<HeroModel> heroes,
-    required List<HeroModel> filteredHeroes,
-    required HeroesStatus status,
+    @Default([]) List<HeroModel> heroes,
+    @Default([]) List<HeroModel> filteredHeroes,
+    @Default(HeroesStatus.initial) HeroesStatus status,
     AppException? failure,
   }) = _HeroesState;
 

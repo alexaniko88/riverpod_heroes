@@ -17,26 +17,26 @@ mixin ExceptionHandlerMixin on NetworkService {
     } catch (e) {
       String message = '';
       String identifier = '';
-      int statusCode = 0;
+      late StatusCode statusCode;
       log(e.runtimeType.toString());
       switch (e.runtimeType) {
         case SocketException _:
           e as SocketException;
           message = 'Unable to connect to the server.';
-          statusCode = 0;
+          statusCode = StatusCode.socketException;
           identifier = 'Socket Exception ${e.message}\n at  $endpoint';
           break;
 
         case DioException _:
           e as DioException;
           message = e.response?.data?['message'] ?? 'Internal Error occurred';
-          statusCode = 1;
+          statusCode = StatusCode.dioException;
           identifier = 'DioException ${e.message} \nat  $endpoint';
           break;
 
         default:
           message = 'Unknown error occurred';
-          statusCode = 2;
+          statusCode = StatusCode.unknownError;
           identifier = 'Unknown error ${e.toString()}\n at $endpoint';
       }
       return Failure(

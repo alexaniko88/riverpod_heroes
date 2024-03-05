@@ -20,7 +20,7 @@ part 'domain/entities/result.dart';
 
 part 'domain/providers/dio_network_service_provider.dart';
 
-part 'exceptions/http_exception.dart';
+part 'exceptions/app_exception.dart';
 
 part 'extensions/int_extensions.dart';
 
